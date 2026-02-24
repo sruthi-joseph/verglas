@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verglas | UAE Brand Strategy & Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="Verglas Logo" class="logo-img">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#partners">Partners</a></li>
+                <li><a href="#contact" class="btn btn-primary">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="hero-brand fade-in">
+                <div class="logo-tilt-container">
+                    <img src="logo.png" alt="Verglas Logo" class="hero-logo-img">
+                </div>
+            </div>
+            <h1 class="fade-in delay-1">Driving Brand Growth <br>in the UAE</h1>
+            <p class="fade-in delay-2">Verglas is the premier gateway for global brands entering the UAE market. We
+                leverage category insights and execution strategies to transform brand potential into market dominance.
+            </p>
+            <div class="hero-btns fade-in delay-3">
+                <a href="#about" class="btn btn-primary">Learn More</a>
+                <a href="#partners" class="btn btn-secondary">Partner With Us</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Our Role in the <br><span>UAE Market</span></h2>
+            <div class="bento-grid">
+                <!-- Card 1: Vision (Emerald Theme) -->
+                <div class="bento-card card-primary">
+                    <div class="card-header-logo">
+                        <img src="logo.png" alt="Verglas Logo" class="card-logo-mini">
+                    </div>
+                    <h3>Vision</h3>
+                    <p><strong>Driving Brand Growth through Insight</strong></p>
+                    <p>Verglas leverages deep category insights and execution strategies to transform brand potential
+                        into market dominance. We don't just distribute; we grow brands.</p>
+                </div>
+                <!-- Card 2: Mission (White) -->
+                <div class="bento-card card-accent">
+                    <div class="card-header-logo">
+                        <img src="logo.png" alt="Verglas Logo" class="card-logo-mini">
+                    </div>
+                    <h3>Mission</h3>
+                    <div class="card-header">
+                        <span class="step-num">01</span>
+                        <p>Maintaining strong and reliable working. Building trust and open communication, being
+                            responsive to needs.</p>
+                    </div>
+                    <div class="card-header">
+                        <span class="step-num">02</span>
+                        <p>Continuous development of quality and efficiency of management systems. Implementing new
+                            technologies.</p>
+                    </div>
+                    <div class="card-header">
+                        <span class="step-num">03</span>
+                        <p>Upholding our values and responsibility towards society. Strive to maintain highest standards
+                            of integrity.</p>
+                    </div>
+                </div>
+                <!-- Card 3: Market Presence (Green) -->
+                <div class="bento-card card-market">
+                    <div class="card-header-logo">
+                        <img src="logo.png" alt="Verglas Logo" class="card-logo-mini logo-white-bg">
+                    </div>
+                    <div class="card-top">
+                        <span class="percentage">100%</span>
+                        <div class="card-icon"><i class="fas fa-sparkles"></i></div>
+                    </div>
+                    <h3>Market Presence</h3>
+                    <p>Verglas offers a Turnkey Solution for the UAE. From regulatory compliance to shelf placement, we
+                        are your local experts.</p>
+                </div>
+                <!-- Card 4: Global Reach (White/Glow) -->
+                <div class="bento-card card-white card-globe">
+                    <div class="card-top-inner">
+                        <img src="logo.png" alt="Verglas Logo" class="card-logo">
+                        <div class="card-icon"><i class="fas fa-globe-ame"></i></div>
+                    </div>
+                    <h3>Global Reach</h3>
+                    <p>Connecting businesses across UAE, GCC, and International markets through strategic partnerships.
+                    </p>
+                    <div class="globe-placeholder"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Operational Excellence</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-warehouse"></i>
+                    <h3>Storage Solutions</h3>
+                    <p>Temperature-controlled storage essential for product integrity in the UAE climate.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-truck-fast"></i>
+                    <h3>Distribution</h3>
+                    <p>Efficient logistics and distribution systems ensuring timely delivery across the region.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Performance Analysis</h3>
+                    <p>In-depth market performance reports and key customer management strategies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners" class="partners">
+        <div class="container">
+            <div class="split">
+                <div class="partner-card retail">
+                    <h3>Retail Partner</h3>
+                    <p>Join our extensive network of elite retailers in the UAE. Benefit from guaranteed supply chains
+                        and marketing support.</p>
+                    <a href="retail-partner.html" class="btn btn-outline">How-To Guide</a>
+                </div>
+                <div class="partner-card brand">
+                    <h3>Brand Ownership</h3>
+                    <p>Scale your international brand in the UAE. We handle regulatory compliance and strategic market
+                        entry.</p>
+                    <a href="brand-ownership.html" class="btn btn-outline">Brand With Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Call Us</h3>
+                            <p>7869546346</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Email Us</h3>
+                            <p>abc@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>WhatsApp</h3>
+                            <p><a href="https://wa.me/917869546346" target="_blank">Message on WhatsApp</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.17851002345!2d55.270445!3d25.188544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f682def90977f%3A0x69680327f12e84d!2sBusiness%20Bay%2C%20Dubai%2C%20United%20Arab%20Emirates!5e0!3m2!1sen!2sae!4v1708800000000!5m2!1sen!2sae"
+                        width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Verglas Strategy & Management. All rights reserved.</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

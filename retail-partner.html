@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Partner Guide | Verglas UAE</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .page-header {
+            padding: 150px 0 80px 0;
+            background: var(--primary-color);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .guide-container {
+            max-width: 1100px;
+            margin: -50px auto 100px auto;
+            background: var(--white);
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .onboarding-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .onboarding-header h2 {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .header-line {
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .process-box {
+            background: #fff;
+            border: 1.5px dashed var(--primary-color);
+            padding: 2.5rem 1.5rem;
+            border-radius: 25px;
+            position: relative;
+            transition: var(--transition);
+            text-align: left;
+        }
+
+        .process-box:hover {
+            background: #f0faf7;
+            transform: translateY(-5px);
+        }
+
+        .step-badge {
+            position: absolute;
+            top: -15px;
+            left: 25px;
+            background: var(--primary-color);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .process-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .process-box p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .contact-box {
+            background: #f8fdfb;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #e0f2ec;
+            margin-top: 2rem;
+        }
+
+        .contact-btns-large {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-btn-large {
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+        }
+
+        .email-btn {
+            background: #007bff;
+            color: white;
+        }
+
+        .contact-btn-large:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 900px) {
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="page-header">
+        <div class="container">
+            <h1>Retailer "How-To" Guide</h1>
+            <p>Start stocking global premium brands in the UAE today.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="guide-container">
+            <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+            <div class="onboarding-header">
+                <h2>Our Onboarding Process</h2>
+                <div class="header-line"></div>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-box">
+                    <span class="step-badge">1</span>
+                    <h3>Initial Enquiry</h3>
+                    <p>Contact the Verglas team via our formal channels. We welcome proposals from established retail
+                        chains.</p>
+                </div>
+                <div class="process-box">
+                    <span class="step-badge">2</span>
+                    <h3>Market Assessment</h3>
+                    <p>Strategic review of your retail presence, target audience, and shelf space alignment.</p>
+                </div>
+                <div class="process-box">
+                    <span class="step-badge">3</span>
+                    <h3>Rapid Onboarding</h3>
+                    <p>Integration into our high-efficiency distribution network with guaranteed supply chains.</p>
+                </div>
+            </div>
+
+            <div class="contact-box">
+                <h3>Ready to Join the Network?</h3>
+                <p>Contact our distribution manager directly to start the conversation.</p>
+                <div class="contact-btns-large">
+                    <a href="https://wa.me/917869546346" target="_blank" class="contact-btn-large whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Us
+                    </a>
+                    <a href="mailto:abc@gmail.com" class="contact-btn-large email-btn">
+                        <i class="fas fa-envelope"></i> Email Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 50px 0;">
+        <div class="container">
+            <p>&copy; 2026 Verglas Strategy & Management. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
