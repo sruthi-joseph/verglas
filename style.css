@@ -97,6 +97,11 @@ body {
     transition: var(--transition);
 }
 
+.nav-links a i {
+    display: none;
+    /* Hide icons on desktop */
+}
+
 .nav-links a:hover {
     color: var(--primary-color);
 }
@@ -1106,9 +1111,21 @@ footer {
 
     .nav-links a {
         font-size: 1.3rem;
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
         padding: 1rem;
         color: var(--text-color);
+    }
+
+    .nav-links a i {
+        display: inline-block;
+        /* Show icons on mobile */
+        font-size: 1.4rem;
+        color: var(--primary-color);
+        width: 30px;
+        text-align: center;
     }
 
     .card-accent .card-header {
