@@ -1064,19 +1064,33 @@ footer {
         display: flex;
     }
 
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
     .nav-links {
         position: fixed;
         left: -100%;
-        top: 70px;
+        top: 0;
         flex-direction: column;
         background: var(--white);
-        width: 100%;
-        height: calc(100vh - 70px);
+        width: 80%;
+        height: 100vh;
         text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        padding: 2rem 0;
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.1);
+        padding: 6rem 0;
         z-index: 1000;
+        display: flex;
+        /* Overriding any hidden states */
     }
 
     .nav-links.active {
@@ -1084,7 +1098,15 @@ footer {
     }
 
     .nav-links li {
-        margin: 1.5rem 0;
+        margin: 1.2rem 0;
+        width: 100%;
+    }
+
+    .nav-links a {
+        font-size: 1.3rem;
+        display: block;
+        padding: 1rem;
+        color: var(--text-color);
     }
 
     .gallery-item {
@@ -1102,9 +1124,6 @@ footer {
         }
     }
 
-    .nav-links {
-        display: none;
-    }
 
     .bento-card {
         padding: 1.2rem;
@@ -1127,6 +1146,21 @@ footer {
         100% {
             transform: translateX(calc(-280px * 3 - 2rem * 3));
         }
+    }
+
+    /* Stacking Partner and Contact boxes */
+    .split,
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .contact-info {
+        gap: 1.5rem;
+    }
+
+    .contact-wrapper iframe {
+        height: 300px;
     }
 }
 
