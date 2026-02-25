@@ -172,3 +172,51 @@ document.querySelectorAll('section, .pop-up, .reveal').forEach(el => {
     observer.observe(el);
 });
 
+// Enhanced Sparkle Effect
+document.addEventListener('mousemove', (e) => {
+    // Create multiple sparkles for a richer effect
+    for (let i = 0; i < 3; i++) {
+        if (Math.random() > 0.4) continue;
+
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+
+        // Random offsets to spread them out
+        const offsetX = (Math.random() - 0.5) * 20;
+        const offsetY = (Math.random() - 0.5) * 20;
+
+        sparkle.style.left = (e.clientX + offsetX) + 'px';
+        sparkle.style.top = (e.clientY + offsetY) + 'px';
+
+        // Random size variation
+        const size = Math.random() * 6 + 2;
+        sparkle.style.width = size + 'px';
+        sparkle.style.height = size + 'px';
+
+        // Random colors from brand palette or white
+        const colors = ['#02A576', '#01845d', '#ffffff', '#ffd700'];
+        sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+        // Add random motion variables
+        const moveX = (Math.random() - 0.5) * 50;
+        const moveY = (Math.random() - 0.5) * 50;
+        sparkle.style.setProperty('--move-x', moveX + 'px');
+        sparkle.style.setProperty('--move-y', moveY + 'px');
+
+        document.body.appendChild(sparkle);
+
+        // Remove sparkle after animation
+        setTimeout(() => {
+            sparkle.remove();
+        }, 1000);
+    }
+});
+
+// Mobile Flip Support
+document.querySelectorAll('.flip-card').forEach(card => {
+    card.addEventListener('click', function () {
+        if (window.innerWidth <= 768) {
+            this.classList.toggle('flipped');
+        }
+    });
+});
