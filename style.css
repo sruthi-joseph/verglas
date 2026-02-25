@@ -39,6 +39,14 @@ body {
     z-index: 1000;
     padding: 1rem 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    /* Smoothly transition all properties */
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 0.5rem 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .navbar .container {
@@ -1025,11 +1033,43 @@ footer {
         grid-column: span 1 !important;
     }
 
+    .navbar {
+        background: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+        padding: 1.5rem 0;
+    }
+
+    .navbar .logo img.logo-img {
+        mix-blend-mode: normal;
+        /* Better visibility on overlay */
+    }
+
+    .navbar.scrolled .logo img.logo-img {
+        mix-blend-mode: multiply;
+    }
+
+    .navbar.scrolled {
+        background: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(15px);
+        padding: 0.8rem 0;
+    }
+
+    .menu-toggle .bar {
+        background-color: var(--white);
+    }
+
+    .navbar.scrolled .menu-toggle .bar {
+        background-color: var(--text-color);
+    }
+
     .hero {
         height: 100vh;
         background-position: 35% center;
-        /* Adjust to show the most iconic part of the skyline */
         background-attachment: scroll;
+        margin-top: 0;
+        /* Ensure no gaps */
     }
 
     .hero-content {
@@ -1147,6 +1187,11 @@ footer {
     .gallery-item {
         width: 260px;
         height: 180px;
+    }
+
+    .gallery-track {
+        animation: scroll 20s linear infinite;
+        /* Explicitly enable for mobile */
     }
 
     @keyframes scroll {

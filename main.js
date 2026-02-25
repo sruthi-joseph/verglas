@@ -107,12 +107,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const navbar = document.querySelector('.navbar');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
-        navbar.style.padding = '0.5rem 0';
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
         navbar.classList.add('scrolled');
     } else {
-        navbar.style.padding = '1rem 0';
-        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
         navbar.classList.remove('scrolled');
     }
 });
