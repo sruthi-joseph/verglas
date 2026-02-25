@@ -26,7 +26,8 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 clamp(1.5rem, 5vw, 2.5rem);
+    /* Fluid container padding */
 }
 
 /* Navbar */
@@ -186,6 +187,7 @@ body {
     position: relative;
     z-index: 10;
     max-width: 800px;
+    width: 100%;
 }
 
 .hero-brand {
@@ -238,9 +240,18 @@ body {
     font-size: clamp(1rem, 2vw, 1.25rem);
     /* Fluid font size */
     max-width: 650px;
-    margin-bottom: 2.5rem;
+    margin-bottom: clamp(2rem, 5vw, 3rem);
     opacity: 0;
     animation: fadeInUpSoft 1s ease-out 1s forwards, letterSpread 1.5s ease-out 1s forwards;
+}
+
+.hero-btns {
+    display: flex;
+    gap: clamp(1rem, 3vw, 1.5rem);
+    /* Adaptive button gap */
+    opacity: 0;
+    animation: fadeInUpSoft 1s ease-out 1.2s forwards;
+    flex-wrap: wrap;
 }
 
 @keyframes revealUp {
@@ -293,14 +304,16 @@ body {
 
 /* About Section */
 .about {
-    padding: 100px 0 150px 0;
+    padding: clamp(5rem, 10vw, 10rem) 0;
+    /* Adaptive padding */
     background-color: var(--white);
 }
 
 .about h2.section-title {
     text-align: center;
-    margin-bottom: 3rem;
-    font-size: 3rem;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    /* Fluid section title */
 }
 
 .about h2 span {
@@ -395,7 +408,8 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: minmax(130px, auto);
-    gap: 0.8rem;
+    gap: clamp(0.5rem, 2vw, 1.2rem);
+    /* Fluid gap */
 }
 
 @keyframes bentoFloat {
@@ -653,7 +667,8 @@ body {
 
 /* Gallery Section */
 .gallery {
-    padding: 100px 0;
+    padding: clamp(5rem, 10vw, 8rem) 0;
+    /* Adaptive padding */
     background: var(--bg-light);
     overflow: hidden;
 }
@@ -710,15 +725,17 @@ body {
 
 /* Services */
 .services {
-    padding: 100px 0;
+    padding: clamp(5rem, 10vw, 8rem) 0;
+    /* Adaptive padding */
     background-color: var(--primary-color);
     color: var(--white);
     text-align: center;
 }
 
 .section-title {
-    font-size: 2.5rem;
-    margin-bottom: 4rem;
+    font-size: clamp(2rem, 5vw, 3rem);
+    /* Global fluid section title */
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
 .services-track-container {
@@ -766,13 +783,15 @@ body {
 
 /* Partners */
 .partners {
-    padding: 80px 0;
+    padding: clamp(4rem, 8vw, 6rem) 0;
+    /* Adaptive padding */
 }
 
 .split {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    /* Fluid gap */
 }
 
 .partner-card {
@@ -819,14 +838,16 @@ body {
 
 /* Contact */
 .contact {
-    padding: 100px 0;
+    padding: clamp(5rem, 10vw, 8rem) 0;
+    /* Adaptive padding */
     background-color: var(--white);
 }
 
 .contact-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: clamp(2rem, 6vw, 5rem);
+    /* Fluid gap */
     align-items: start;
 }
 
@@ -838,10 +859,25 @@ body {
     margin: 0;
 }
 
+.contact-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: var(--transition);
+}
+
 .contact-item {
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    padding: 1rem;
+    border-radius: 15px;
+    transition: var(--transition-soft);
+}
+
+.contact-card-link:hover .contact-item {
+    background: #f8fafc;
+    transform: translateX(10px);
 }
 
 .contact-icon {
@@ -855,6 +891,17 @@ body {
     font-size: 1.5rem;
     color: #555;
     flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.contact-card-link:hover .contact-icon {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: rotate(10deg);
+}
+
+.contact-card-link:hover .contact-text h3 {
+    color: var(--primary-color);
 }
 
 .contact-text h3 {
