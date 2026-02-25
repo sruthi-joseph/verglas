@@ -1025,6 +1025,13 @@ footer {
         grid-column: span 1 !important;
     }
 
+    .hero {
+        height: 100vh;
+        background-position: 35% center;
+        /* Adjust to show the most iconic part of the skyline */
+        background-attachment: scroll;
+    }
+
     .hero-content {
         text-align: left;
         padding: 0 1.5rem;
