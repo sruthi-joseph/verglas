@@ -5,7 +5,8 @@
     --text-light: #f4f4f4;
     --white: #ffffff;
     --bg-light: #f9f9f9;
-    --transition: all 0.3s ease;
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --transition-soft: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 * {
@@ -56,7 +57,23 @@ body {
     width: auto;
     object-fit: contain;
     mix-blend-mode: multiply;
-    /* Makes white background of the image transparent on the white navbar */
+    transition: var(--transition);
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 6px;
+    z-index: 1001;
+}
+
+.menu-toggle .bar {
+    width: 28px;
+    height: 3px;
+    background-color: var(--text-color);
+    transition: var(--transition);
+    border-radius: 2px;
 }
 
 .navbar.scrolled .logo img.logo-img {
@@ -178,19 +195,84 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
     backface-visibility: hidden;
     transform: translateZ(20px);
+    animation: flyIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-.hero h1 {
+.hero-title {
+    margin-bottom: 1.5rem;
+}
+
+.hero-title .line {
+    display: block;
+    overflow: hidden;
+    line-height: 1.2;
+}
+
+.hero-title .reveal-inner {
+    display: block;
     font-size: 4rem;
     font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
+    transform: translateY(100%);
+    animation: revealUp 1.2s cubic-bezier(0.19, 1, 0.22, 1) 0.3s forwards;
+}
+
+.hero-title .line:nth-child(2) .reveal-inner {
+    animation-delay: 0.5s;
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
-    opacity: 0.9;
+    opacity: 0;
+    animation: fadeInUpSoft 1s ease-out 1s forwards, letterSpread 1.5s ease-out 1s forwards;
+}
+
+@keyframes revealUp {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes letterSpread {
+    0% {
+        letter-spacing: 0.2em;
+        opacity: 0;
+    }
+
+    100% {
+        letter-spacing: normal;
+        opacity: 0.9;
+    }
+}
+
+@keyframes fadeInUpSoft {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
+}
+
+@keyframes flyIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) translateZ(-500px) scale(0.8);
+        filter: blur(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) translateZ(0) scale(1);
+        filter: blur(0);
+    }
 }
 
 /* About Section */
@@ -300,21 +382,76 @@ body {
     gap: 0.8rem;
 }
 
+@keyframes bentoFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
 .bento-card {
-    padding: 1rem;
-    border-radius: 15px;
+    padding: 1.5rem;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    transition: var(--transition);
+    transition: var(--transition-soft);
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    animation: bentoFloat 4s ease-in-out infinite;
+}
+
+.bento-card:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.bento-card:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.bento-card:nth-child(3) {
+    animation-delay: 2s;
+}
+
+.bento-card:nth-child(4) {
+    animation-delay: 1.5s;
 }
 
 .bento-card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+    animation-play-state: paused;
+}
+
+.hover-arrow {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: var(--transition);
+    pointer-events: none;
+}
+
+.bento-card:hover .hover-arrow,
+.gallery-item-wrapper:hover .hover-arrow,
+.service-card:hover .hover-arrow {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .bento-card h3 {
@@ -345,7 +482,6 @@ body {
 .card-primary {
     background-color: var(--primary-color);
     color: var(--white);
-    grid-column: span 2;
 }
 
 .card-header-logo {
@@ -362,10 +498,14 @@ body {
     border-radius: 8px;
 }
 
+.logo-white-bg {
+    background: var(--white) !important;
+    padding: 8px 15px !important;
+}
+
 .card-accent {
     background-color: var(--white);
     color: var(--text-color);
-    grid-row: span 2;
     justify-content: space-around;
     padding: 2rem;
     border: 1px solid #f1f5f9;
@@ -394,12 +534,10 @@ body {
 .card-market {
     background-color: var(--primary-color);
     color: var(--white);
-    transform: translateY(30px);
     box-shadow: 0 15px 35px rgba(2, 165, 118, 0.2);
 }
 
 .card-market:hover {
-    transform: translateY(15px);
     box-shadow: 0 30px 60px rgba(2, 165, 118, 0.3);
 }
 
@@ -417,22 +555,26 @@ body {
 }
 
 .card-market .card-icon {
-    background: rgba(255, 255, 255, 0.2);
-    color: #fbbf24;
+    background: transparent;
+    color: var(--white);
     margin: 0;
+    font-size: 2rem;
 }
 
 .card-white {
     background-color: var(--white);
     color: var(--text-color);
-    grid-column: span 2;
     border: 1px solid #f1f5f9;
 }
 
 .card-white .card-icon {
-    background: #eff6ff;
-    color: #3b82f6;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    color: var(--primary-color);
     margin: 0;
+    font-size: 2rem;
+    /* Make it slightly larger since the box is gone */
 }
 
 .card-top-inner {
@@ -514,17 +656,30 @@ body {
     animation: scroll 30s linear infinite;
 }
 
+.gallery-item-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(2, 165, 118, 0.3);
+    transition: var(--transition-soft);
+}
+
 .gallery-item {
     width: 300px;
     height: 200px;
     object-fit: cover;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    filter: grayscale(100%);
+    transition: var(--transition-soft);
 }
 
-.gallery-item:hover {
-    transform: scale(1.05);
+.gallery-item-wrapper:hover .gallery-item {
+    transform: scale(1.1);
+    filter: grayscale(0%) saturate(1.2);
+}
+
+.gallery-item-wrapper:hover {
+    box-shadow: 0 15px 45px rgba(2, 165, 118, 0.5);
+    z-index: 10;
 }
 
 @keyframes scroll {
@@ -572,16 +727,19 @@ body {
 .service-card {
     background: var(--white);
     color: var(--text-color);
-    padding: 2.5rem 2rem;
+    padding: 3rem 2rem;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: var(--transition);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: var(--transition-soft);
     text-align: center;
+    position: relative;
+    filter: grayscale(100%);
 }
 
 .service-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    transform: translateY(-12px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+    filter: grayscale(0%);
 }
 
 .service-card i {
@@ -739,10 +897,6 @@ footer {
     animation-delay: 0.4s;
 }
 
-.delay-1 {
-    animation-delay: 0.4s;
-}
-
 .delay-2 {
     animation-delay: 0.8s;
 }
@@ -755,13 +909,17 @@ footer {
     from {
         opacity: 0;
         transform: translateY(60px) scale(0.95);
-        /* Larger movement for more visibility */
     }
 
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
 }
 
 /* Hero Specific Animations */
@@ -796,14 +954,10 @@ footer {
     }
 }
 
-.hero h1 {
-    font-size: 4rem;
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
+/* Hero h1 is now .hero-title and .reveal-inner */
+.hero-title .reveal-inner {
     color: var(--white);
     text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(2, 165, 118, 0.4);
-    transition: var(--transition);
 }
 
 @keyframes shine {
@@ -874,8 +1028,8 @@ footer {
         align-items: center;
     }
 
-    .hero h1 {
-        font-size: 2.5rem;
+    .hero-title .reveal-inner {
+        font-size: 2.2rem;
         text-align: center;
     }
 
@@ -883,6 +1037,8 @@ footer {
         font-size: 1rem;
         text-align: center;
         margin-bottom: 2.5rem;
+        animation: fadeInUpSoft 1s ease-out 0.8s forwards;
+        /* Simplified for mobile */
     }
 
     .hero-btns {
@@ -904,8 +1060,59 @@ footer {
         margin-bottom: 1rem;
     }
 
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: var(--white);
+        width: 100%;
+        height: calc(100vh - 70px);
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 2rem 0;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        margin: 1.5rem 0;
+    }
+
+    .gallery-item {
+        width: 260px;
+        height: 180px;
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(calc(-260px * 6 - 2rem * 6));
+        }
+    }
+
     .nav-links {
         display: none;
+    }
+
+    .bento-card {
+        padding: 1.2rem;
+        min-height: 160px;
+    }
+
+    .bento-card h3 {
+        font-size: 1.1rem;
     }
 
     .services-track .service-card {
