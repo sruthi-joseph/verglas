@@ -1021,38 +1021,40 @@ footer {
     }
 
     .hero-content {
-        text-align: center;
+        text-align: left;
         padding: 0 1.5rem;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
     }
 
     .hero-title .reveal-inner {
-        font-size: 2.2rem;
-        text-align: center;
+        font-size: 2.8rem;
+        text-align: left;
     }
 
     .hero p {
         font-size: 1rem;
-        text-align: center;
-        margin-bottom: 2.5rem;
+        text-align: left;
+        margin-bottom: 2rem;
         animation: fadeInUpSoft 1s ease-out 0.8s forwards;
-        /* Simplified for mobile */
     }
 
     .hero-btns {
         display: flex;
-        flex-direction: column;
-        gap: 1.2rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1rem;
         width: 100%;
-        max-width: 300px;
+        justify-content: flex-start;
     }
 
     .hero-btns .btn {
         margin-left: 0;
-        width: 100%;
+        width: auto;
+        min-width: 140px;
         text-align: center;
+        padding: 0.8rem 1.2rem;
     }
 
     .hero-logo-img {
@@ -1107,6 +1109,15 @@ footer {
         display: block;
         padding: 1rem;
         color: var(--text-color);
+    }
+
+    .card-accent .card-header {
+        margin-bottom: 2rem;
+        /* Increased spacing between mission points */
+    }
+
+    .card-accent .card-header:last-child {
+        margin-bottom: 0;
     }
 
     .gallery-item {
