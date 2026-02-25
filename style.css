@@ -1189,9 +1189,29 @@ footer {
         height: 180px;
     }
 
+    .gallery-track-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* IE/Edge */
+    }
+
+    .gallery-track-container::-webkit-scrollbar {
+        display: none;
+        /* Chrome/Safari/Webkit */
+    }
+
     .gallery-track {
-        animation: scroll 20s linear infinite;
-        /* Explicitly enable for mobile */
+        animation: scroll 25s linear infinite;
+        display: flex;
+        width: max-content;
+    }
+
+    .gallery-track-container:hover .gallery-track,
+    .gallery-track-container:active .gallery-track {
+        animation-play-state: paused;
     }
 
     @keyframes scroll {
@@ -1214,8 +1234,26 @@ footer {
         font-size: 1.1rem;
     }
 
-    .services-track .service-card {
-        width: 280px;
+    .services-track-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .services-track-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .services-track {
+        animation: servicesScroll 25s linear infinite;
+        display: flex;
+        width: max-content;
+    }
+
+    .services-track-container:hover .services-track,
+    .services-track-container:active .services-track {
+        animation-play-state: paused;
     }
 
     @keyframes servicesScroll {
