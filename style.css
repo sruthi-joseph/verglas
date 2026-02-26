@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --primary-color: #02A576;
     --primary-dark: #01845d;
     --text-color: #1a1a1a;
@@ -680,11 +680,15 @@ body {
     position: relative;
 }
 
+.gallery-track-container:hover .gallery-track {
+    animation-play-state: paused;
+}
+
 .gallery-track {
     display: flex;
     width: max-content;
     gap: 2rem;
-    animation: scroll 30s linear infinite;
+    animation: scroll 40s linear infinite;
 }
 
 .gallery-item-wrapper {
@@ -725,11 +729,12 @@ body {
 
 /* Services */
 .services {
-    padding: clamp(5rem, 10vw, 8rem) 0;
-    /* Adaptive padding */
+    padding: clamp(5rem, 10vw, 8rem) 0 2rem 0;
+    /* Reduced bottom padding */
     background-color: var(--primary-color);
     color: var(--white);
     text-align: center;
+    margin-bottom: 0;
 }
 
 .section-title {
@@ -745,11 +750,25 @@ body {
     position: relative;
 }
 
+.services-track-container:hover .services-track {
+    animation-play-state: paused;
+}
+
 .services-track {
     display: flex;
     width: max-content;
     gap: 2rem;
-    animation: servicesScroll 20s linear infinite;
+    animation: servicesScroll 25s linear infinite;
+}
+
+@keyframes servicesScroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-350px * 3 - 2rem * 3));
+    }
 }
 
 .services-track .service-card {
@@ -783,8 +802,21 @@ body {
 
 /* Partners */
 .partners {
-    padding: clamp(4rem, 8vw, 6rem) 0;
-    /* Adaptive padding */
+    padding: 2rem 0;
+    /* Balanced padding for middle section */
+    background-color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.partners .section-title {
+    color: var(--white);
+    margin-bottom: 3rem;
+}
+
+.partners .section-title span {
+    color: var(--white);
+    opacity: 0.9;
 }
 
 .split {
@@ -799,6 +831,14 @@ body {
     width: 100%;
     height: 350px;
     perspective: 1000px;
+    opacity: 0;
+    transform: scale(0.6) translateY(50px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.flip-card.active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
 }
 
 .flip-card-inner {
@@ -1438,4 +1478,110 @@ footer {
 .contact-btn-modal:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Brand Partners Section */
+.brand-partners {
+    padding: 2rem 0 clamp(4rem, 8vw, 6rem) 0;
+    background-color: var(--primary-color);
+    position: relative;
+    overflow: hidden;
+    margin-top: 0;
+}
+
+.brand-partners .section-title {
+    color: var(--white);
+}
+
+.brand-partners .section-title span {
+    color: var(--white);
+    opacity: 0.9;
+}
+
+.brand-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.brand-card {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: clamp(1.5rem, 3vw, 2.5rem);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    transition: var(--transition-soft);
+    max-width: 400px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0.6) translateY(50px);
+}
+
+.brand-card.active {
+    animation: popUpEnhanced 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.brand-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(2, 165, 118, 0.15);
+}
+
+@keyframes popUpEnhanced {
+    0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.brand-logo-wrapper {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f8fdfb;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.brand-logo-item {
+    height: 110px;
+    width: auto;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    transition: var(--transition-soft);
+}
+
+.brand-card:hover .brand-logo-item {
+    transform: scale(1.1);
+}
+
+.brand-info h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.brand-info p {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .brand-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .brand-card {
+        width: 100%;
+    }
 }
