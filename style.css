@@ -802,20 +802,22 @@ body {
 
 /* Partners */
 .partners {
-    padding: 2rem 0;
-    /* Balanced padding for middle section */
-    background-color: var(--primary-color);
+    padding: clamp(5rem, 10vw, 8rem) 0;
+    /* Consistent padding */
+    background-color: var(--white) !important;
     margin-top: 0;
     margin-bottom: 0;
+    position: relative;
+    z-index: 5;
 }
 
 .partners .section-title {
-    color: var(--white);
+    color: var(--primary-color);
     margin-bottom: 3rem;
 }
 
 .partners .section-title span {
-    color: var(--white);
+    color: var(--primary-dark);
     opacity: 0.9;
 }
 
@@ -829,16 +831,9 @@ body {
 .flip-card {
     background-color: transparent;
     width: 100%;
-    height: 350px;
+    height: 450px;
     perspective: 1000px;
-    opacity: 0;
-    transform: scale(0.6) translateY(50px);
-    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.flip-card.active {
-    opacity: 1;
-    transform: scale(1) translateY(0);
+    border-radius: 20px;
 }
 
 .flip-card-inner {
@@ -846,12 +841,11 @@ body {
     width: 100%;
     height: 100%;
     text-align: center;
-    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     transform-style: preserve-3d;
 }
 
-.flip-card:hover .flip-card-inner,
-.flip-card.flipped .flip-card-inner {
+.flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);
 }
 
@@ -867,56 +861,103 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding: 2.5rem;
+    top: 0;
+    left: 0;
+}
+
+.flip-card-front {
+    transform: rotateY(0deg);
+    z-index: 2;
 }
 
 .flip-card-back {
     transform: rotateY(180deg);
+    z-index: 1;
 }
 
 .partner-card {
-    color: var(--white);
+    background-size: cover !important;
+    background-position: center !important;
+    color: var(--white) !important;
     text-align: center;
-    transition: box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 1;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
 }
 
-.flip-details {
+.partner-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.85));
+    z-index: -1;
+    transition: opacity 0.4s ease;
+}
+
+.partner-card h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+    font-weight: 700;
+}
+
+.partner-card p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 300px;
+}
+
+.partner-details {
     list-style: none;
     padding: 0;
-    margin: 1.5rem 0;
+    margin: 1.5rem 0 2rem 0;
     text-align: left;
+    width: 100%;
+    max-width: 260px;
 }
 
-.flip-details li {
-    margin-bottom: 0.8rem;
+.partner-details li {
+    margin-bottom: 0.9rem;
     font-size: 1.1rem;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.95);
 }
 
-.tap-indicator {
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
-    opacity: 0.8;
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .tap-indicator {
-        display: block;
-    }
+.partner-details i {
+    color: var(--primary-color);
+    font-size: 1rem;
 }
 
 .partner-card.retail {
-    background: linear-gradient(rgba(2, 165, 118, 0.9), rgba(2, 165, 118, 0.9)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80');
-    background-size: cover;
+    background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80') no-repeat;
 }
 
 .partner-card.brand {
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80');
-    background-size: cover;
+    background: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80') no-repeat;
 }
+
+.partner-card .btn-outline {
+    border: 2px solid var(--white) !important;
+    color: var(--white) !important;
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+}
+
+.partner-card .btn-outline:hover {
+    background: var(--white) !important;
+    color: var(--primary-color) !important;
+}
+
 
 /* Enhanced Sparkle Effect */
 .sparkle {
@@ -1510,15 +1551,17 @@ footer {
     background: var(--white);
     padding: 2.5rem;
     border-radius: clamp(1.5rem, 3vw, 2.5rem);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    /* Stronger shadow for better pop */
     transition: var(--transition-soft);
     max-width: 400px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    /* More visible border */
     position: relative;
     overflow: hidden;
     opacity: 0;
-    transform: scale(0.6) translateY(50px);
+    transform: scale(0.7) translateY(40px);
 }
 
 .brand-card.active {
@@ -1533,7 +1576,12 @@ footer {
 @keyframes popUpEnhanced {
     0% {
         opacity: 0;
-        transform: scale(0.6) translateY(50px);
+        transform: scale(0.7) translateY(40px);
+    }
+
+    70% {
+        transform: scale(1.1) translateY(-15px);
+        /* Stronger "pop" effect */
     }
 
     100% {

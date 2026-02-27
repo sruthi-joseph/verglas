@@ -212,32 +212,3 @@ document.addEventListener('mousemove', (e) => {
     }
 });
 
-// Mobile Flip Support (Tap & Scroll)
-const flipCards = document.querySelectorAll('.flip-card');
-const flipObserverOptions = {
-    threshold: 0.6 // Flip when 60% of the card is visible
-};
-
-const flipObserver = new IntersectionObserver((entries) => {
-    if (window.innerWidth <= 768) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('flipped');
-            } else {
-                // Optional: Unflip when scrolling away
-                entry.target.classList.remove('flipped');
-            }
-        });
-    }
-}, flipObserverOptions);
-
-flipCards.forEach(card => {
-    flipObserver.observe(card);
-
-    // Manual toggle on click remains for accessibility/preference
-    card.addEventListener('click', function () {
-        if (window.innerWidth <= 768) {
-            this.classList.toggle('flipped');
-        }
-    });
-});
