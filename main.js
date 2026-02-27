@@ -88,7 +88,11 @@ const initHero3D = () => {
     animate();
 };
 
-initHero3D();
+try {
+    initHero3D();
+} catch (e) {
+    console.error('Hero 3D initialization failed:', e);
+}
 
 // Smooth Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -171,6 +175,15 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('section, .pop-up, .reveal').forEach(el => {
     observer.observe(el);
 });
+
+// Explicitly clear any persistent scroll-driven rotation
+document.querySelectorAll('.flip-card').forEach(card => {
+    card.style.removeProperty('--flip-rotation');
+    card.classList.remove('is-flipping');
+    card.classList.remove('active');
+});
+
+// Initial trigger removed, flipping is now hover-based in CSS.
 
 // Enhanced Sparkle Effect
 document.addEventListener('mousemove', (e) => {

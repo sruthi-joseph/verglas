@@ -846,7 +846,7 @@ body {
 }
 
 .flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) !important;
 }
 
 .flip-card-front,
@@ -910,6 +910,11 @@ body {
     font-size: 1.15rem;
     line-height: 1.6;
     max-width: 300px;
+}
+
+/* Dynamic background change during hover flip */
+.flip-card:hover .partner-card::before {
+    background: linear-gradient(to bottom, rgba(2, 165, 118, 0.4), rgba(1, 132, 93, 0.9));
 }
 
 .partner-details {
@@ -1084,6 +1089,32 @@ body {
 
 .map-container iframe {
     display: block;
+}
+
+.developers-mention {
+    text-align: center;
+    margin-top: 4rem;
+    padding: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.developers-mention p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.developers-mention a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.developers-mention a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
 }
 
 /* Footer */
