@@ -1598,8 +1598,8 @@ footer {
 /* Brand Partners Section */
 .brand-partners {
     padding: 2rem 0 clamp(4rem, 8vw, 6rem) 0;
-    /* Image background */
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('arun icecream product line.jpeg') center/cover no-repeat;
+    /* White background */
+    background-color: var(--white);
     position: relative;
     overflow: hidden;
     margin-top: 0;
@@ -1610,19 +1610,25 @@ footer {
     /* Hide the video element */
 }
 
+.brand-partners .brand-card {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('arun icecream product line.jpeg') center/cover no-repeat;
+    border: none;
+}
 
-
-/* Removed flip card back styles as they are no longer used */
-
-/* Removed product line image styles as it is now a card background */
-
-.brand-partners .section-title {
+.brand-partners .brand-info h3 {
     color: var(--white);
 }
 
+.brand-partners .brand-info p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.brand-partners .section-title {
+    color: var(--primary-color);
+}
+
 .brand-partners .section-title span {
-    color: var(--white);
-    opacity: 0.9;
+    color: var(--primary-dark);
 }
 
 .brand-grid {
