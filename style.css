@@ -1756,6 +1756,12 @@ footer {
     .brand-card {
         width: 100%;
     }
+
+    .brand-partners .brand-card {
+        width: 90%;
+        max-width: 320px;
+        padding: 1.5rem;
+    }
 }
 
 /* Retail Network Section */
