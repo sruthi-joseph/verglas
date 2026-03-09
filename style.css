@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     --primary-color: #02A576;
     --primary-dark: #01845d;
     --text-color: #1a1a1a;
@@ -748,6 +748,7 @@ body.js-ready .fade-in.active {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
+    flex-shrink: 0;
 }
 
 .gallery-item {
@@ -1597,53 +1598,22 @@ footer {
 /* Brand Partners Section */
 .brand-partners {
     padding: 2rem 0 clamp(4rem, 8vw, 6rem) 0;
-    background-color: var(--primary-color);
+    /* Image background */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('arun icecream product line.jpeg') center/cover no-repeat;
     position: relative;
     overflow: hidden;
     margin-top: 0;
 }
 
-.brand-partners .flip-card {
-    height: 400px;
-    max-width: 450px;
-    margin: 0 auto;
-    perspective: 1000px;
+.brand-partners-bg-video {
+    display: none;
+    /* Hide the video element */
 }
 
-.brand-partners .flip-card .brand-card,
-.brand-partners .flip-card .brand-card:hover {
-    opacity: 1 !important;
-    animation: none !important;
-    position: absolute !important;
-    visibility: visible !important;
-    backface-visibility: hidden !important;
-}
 
-.brand-partners .flip-card-front.brand-card {
-    transform: rotateY(0deg) !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2.5rem;
-    height: 100%;
-}
+/* Removed flip card back styles as they are no longer used */
 
-.brand-partners .flip-card-back.brand-card {
-    transform: rotateY(180deg) !important;
-}
-
-.brand-partners .product-line-back {
-    padding: 0;
-    background: transparent;
-    border: none;
-}
-
-.brand-partners .product-line-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 20px;
-}
+/* Removed product line image styles as it is now a card background */
 
 .brand-partners .section-title {
     color: var(--white);
