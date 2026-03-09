@@ -1847,6 +1847,12 @@ footer {
 
 @media (max-width: 768px) {
 
+    /* Force horizontal layout for the carousel track, overriding .brand-grid's column direction */
+    .logo-carousel-track {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+    }
+
     /* Scale down the entire retail logo carousel cards to fit ~2.5 cards on screen */
     .logo-carousel-track .brand-card {
         flex: 0 0 200px;
