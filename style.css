@@ -745,6 +745,9 @@ body.js-ready .fade-in.active {
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(2, 165, 118, 0.3);
     transition: var(--transition-soft);
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
 }
 
 .gallery-item {
@@ -822,6 +825,9 @@ body.js-ready .fade-in.active {
     text-align: center;
     position: relative;
     filter: grayscale(100%);
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
 }
 
 .service-card:hover {
