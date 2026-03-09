@@ -1827,7 +1827,32 @@ footer {
     .logo-carousel-track .brand-card {
         flex: 0 0 200px;
         width: 200px !important;
+        height: 380px;
+        /* Fixed height for uniformity */
         padding: 1.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .logo-carousel-track .brand-logo-wrapper {
+        min-height: 100px;
+        /* Consistent logo area */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .logo-carousel-track .brand-info h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        min-height: 2.8rem;
+        /* Align titles even if they wrap */
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .retail-network .logo-noon,
