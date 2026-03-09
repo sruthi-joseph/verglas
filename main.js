@@ -1,227 +1,201 @@
-// Three.js Hero Background
-const initHero3D = () => {
-    const canvas = document.querySelector('#hero-canvas');
-    if (!canvas) return;
+console.log('Verglas: main.js loading started...');
+document.body.classList.add('js-ready');
 
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
-
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
-    const pointLight = new THREE.PointLight(0x02A576, 1);
-    pointLight.position.set(5, 5, 5);
-    scene.add(pointLight);
-
-    // Geometry - Floating Crystals
-    const crystals = [];
-    const geometry = new THREE.IcosahedronGeometry(1, 0);
-    const material = new THREE.MeshPhongMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: 0.2,
-        flatShading: true,
-        shininess: 100
-    });
-
-    for (let i = 0; i < 20; i++) {
-        const mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(
-            (Math.random() - 0.5) * 15,
-            (Math.random() - 0.5) * 15,
-            (Math.random() - 0.5) * 15
-        );
-        mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
-        const scale = Math.random() * 0.5 + 0.1;
-        mesh.scale.set(scale, scale, scale);
-        scene.add(mesh);
-        crystals.push({
-            mesh,
-            speed: Math.random() * 0.01,
-            rotSpeed: Math.random() * 0.02
-        });
-    }
-
-    // Mouse Parallax
-    let mouseX = 0, mouseY = 0;
-    document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / window.innerWidth) - 0.5;
-        mouseY = (e.clientY / window.innerHeight) - 0.5;
-
-        // Logo Tilt Logic
-        const tiltContainer = document.querySelector('.logo-tilt-container');
-        if (tiltContainer) {
-            const tiltX = mouseY * 40; // Max tilt 40deg
-            const tiltY = -mouseX * 40;
-            tiltContainer.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+// Utility: Throttle function to limit execution rate
+const throttle = (func, limit) => {
+    let lastFunc;
+    let lastRan;
+    return function () {
+        const context = this;
+        const args = arguments;
+        if (!lastRan) {
+            func.apply(context, args);
+            lastRan = Date.now();
+        } else {
+            clearTimeout(lastFunc);
+            lastFunc = setTimeout(function () {
+                if ((Date.now() - lastRan) >= limit) {
+                    func.apply(context, args);
+                    lastRan = Date.now();
+                }
+            }, limit - (Date.now() - lastRan));
         }
-    });
-
-    const animate = () => {
-        requestAnimationFrame(animate);
-
-        crystals.forEach(c => {
-            c.mesh.rotation.x += c.rotSpeed;
-            c.mesh.rotation.y += c.rotSpeed;
-            c.mesh.position.y += Math.sin(Date.now() * 0.001) * 0.002;
-        });
-
-        // Smooth camera movement
-        camera.position.x += (mouseX * 2 - camera.position.x) * 0.05;
-        camera.position.y += (-mouseY * 2 - camera.position.y) * 0.05;
-        camera.lookAt(scene.position);
-
-        renderer.render(scene, camera);
-    };
-
-    const handleResize = () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    animate();
+    }
 };
 
-try {
-    initHero3D();
-} catch (e) {
-    console.error('Hero 3D initialization failed:', e);
-}
+// Intersection Observer for fade-in animations
+const observerOptions = {
+    threshold: 0.05 // Lower threshold for better trigger
+};
+
+console.log('Verglas: Initializing animation observer...');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            // Do NOT add fade-in class here, it already exists in HTML
+        }
+    });
+}, observerOptions);
+
+// Observe all potential revealable elements
+document.querySelectorAll('section, header, .pop-up, .reveal, .reveal-inner, .fade-in, .hero-content').forEach(el => {
+    observer.observe(el);
+});
 
 // Smooth Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(href);
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
+            target.scrollIntoView({ behavior: 'smooth' });
         }
     });
 });
 
 // Header scroll effect
 const navbar = document.querySelector('.navbar');
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', throttle(() => {
     if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
-});
+}, 50));
+// Three.js Hero Background
+const initHero3D = () => {
+    const canvas = document.querySelector('#hero-canvas');
+    if (!canvas) return;
 
-// Mobile Menu Toggle
-const menuToggle = document.getElementById('mobile-menu');
-const navLinks = document.querySelector('.nav-links');
+    try {
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
 
-if (menuToggle && navLinks) {
-    menuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        menuToggle.classList.toggle('active');
-    });
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0x02A576, 1);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
 
-    // Close menu when clicking a link
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            menuToggle.classList.remove('active');
+        // Geometry - Floating Crystals
+        const crystals = [];
+        const geometry = new THREE.IcosahedronGeometry(1, 0);
+        const material = new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.2,
+            flatShading: true,
+            shininess: 100
         });
-    });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
-            navLinks.classList.remove('active');
-            menuToggle.classList.remove('active');
+        for (let i = 0; i < 20; i++) {
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.position.set(
+                (Math.random() - 0.5) * 15,
+                (Math.random() - 0.5) * 15,
+                (Math.random() - 0.5) * 15
+            );
+            mesh.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+            const scale = Math.random() * 0.5 + 0.1;
+            mesh.scale.set(scale, scale, scale);
+            scene.add(mesh);
+            crystals.push({
+                mesh,
+                speed: Math.random() * 0.01,
+                rotSpeed: Math.random() * 0.02
+            });
         }
-    });
-}
 
-// Contact Form Submission (Mock)
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        alert('Thank you for your message! Our team will contact you via WhatsApp/Email shortly.');
-        this.reset();
-    });
-}
+        let isVisible = true;
+        let animationId;
+        let mouseX = 0, mouseY = 0;
 
+        const animate = () => {
+            if (!isVisible) return;
+            animationId = requestAnimationFrame(animate);
 
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1
+            crystals.forEach(c => {
+                c.mesh.rotation.x += c.rotSpeed;
+                c.mesh.rotation.y += c.rotSpeed;
+                c.mesh.position.y += Math.sin(Date.now() * 0.001) * 0.002;
+            });
+
+            camera.position.x += (mouseX * 2 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 2 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        };
+
+        const threeObserver = new IntersectionObserver((entries) => {
+            isVisible = entries[0].isIntersecting;
+            if (isVisible) animate();
+            else cancelAnimationFrame(animationId);
+        }, { threshold: 0.1 });
+
+        threeObserver.observe(canvas);
+
+        const handleResize = () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        // Parallax update
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) - 0.5;
+            mouseY = (e.clientY / window.innerHeight) - 0.5;
+
+            const tiltContainer = document.querySelector('.logo-tilt-container');
+            if (tiltContainer) {
+                const tiltX = mouseY * 40;
+                const tiltY = -mouseX * 40;
+                tiltContainer.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+            }
+        });
+
+    } catch (err) {
+        console.error('Verglas: Three.js init error:', err);
+    }
 };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            entry.target.classList.add('fade-in');
-            if (entry.target.classList.contains('pop-up')) {
-                entry.target.classList.add('visible');
-            }
-        }
-    });
-}, observerOptions);
+// Sparkle Effect
+const createSparkles = throttle((e) => {
+    const maxSparkles = 10;
+    if (document.querySelectorAll('.sparkle').length >= maxSparkles) return;
 
-document.querySelectorAll('section, .pop-up, .reveal').forEach(el => {
-    observer.observe(el);
-});
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = e.clientX + 'px';
+    sparkle.style.top = e.clientY + 'px';
 
-// Explicitly clear any persistent scroll-driven rotation
-document.querySelectorAll('.flip-card').forEach(card => {
-    card.style.removeProperty('--flip-rotation');
-    card.classList.remove('is-flipping');
-    card.classList.remove('active');
-});
+    const size = Math.random() * 5 + 2;
+    sparkle.style.width = size + 'px';
+    sparkle.style.height = size + 'px';
 
-// Initial trigger removed, flipping is now hover-based in CSS.
+    const colors = ['#02A576', '#ffffff', '#ffd700'];
+    sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 
-// Enhanced Sparkle Effect
-document.addEventListener('mousemove', (e) => {
-    // Create multiple sparkles for a richer effect
-    for (let i = 0; i < 3; i++) {
-        if (Math.random() > 0.4) continue;
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 800);
+}, 50);
 
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
+document.addEventListener('mousemove', createSparkles);
 
-        // Random offsets to spread them out
-        const offsetX = (Math.random() - 0.5) * 20;
-        const offsetY = (Math.random() - 0.5) * 20;
+// Initialize Three.js if available
+if (typeof THREE !== 'undefined') {
+    initHero3D();
+}
 
-        sparkle.style.left = (e.clientX + offsetX) + 'px';
-        sparkle.style.top = (e.clientY + offsetY) + 'px';
-
-        // Random size variation
-        const size = Math.random() * 6 + 2;
-        sparkle.style.width = size + 'px';
-        sparkle.style.height = size + 'px';
-
-        // Random colors from brand palette or white
-        const colors = ['#02A576', '#01845d', '#ffffff', '#ffd700'];
-        sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-
-        // Add random motion variables
-        const moveX = (Math.random() - 0.5) * 50;
-        const moveY = (Math.random() - 0.5) * 50;
-        sparkle.style.setProperty('--move-x', moveX + 'px');
-        sparkle.style.setProperty('--move-y', moveY + 'px');
-
-        document.body.appendChild(sparkle);
-
-        // Remove sparkle after animation
-        setTimeout(() => {
-            sparkle.remove();
-        }, 1000);
-    }
-});
+console.log('Verglas: All effects initialized.');
 
