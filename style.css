@@ -1844,3 +1844,35 @@ footer {
 .logo-safari {
     height: 180px;
 }
+
+@media (max-width: 768px) {
+
+    /* Scale down the entire retail logo carousel cards to fit ~2.5 cards on screen */
+    .logo-carousel-track .brand-card {
+        flex: 0 0 200px;
+        width: 200px !important;
+        padding: 1.5rem 1rem;
+    }
+
+    /* Scale down the logos specifically in the retail network */
+    .retail-network .logo-ajman {
+        max-height: 80px;
+    }
+
+    .retail-network .logo-noon,
+    .retail-network .logo-safari,
+    .retail-network .logo-mango {
+        height: 80px;
+    }
+
+    /* Scale down the text within the small cards */
+    .logo-carousel-track .brand-info h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .logo-carousel-track .brand-info p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+}
