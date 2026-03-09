@@ -719,20 +719,23 @@ body.js-ready .fade-in.active {
 
 .gallery-track-container {
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     padding: 2rem 0;
     position: relative;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
 }
 
-.gallery-track-container:hover .gallery-track {
-    animation-play-state: paused;
+.gallery-track-container::-webkit-scrollbar {
+    display: none;
 }
 
 .gallery-track {
     display: flex;
     width: max-content;
     gap: 2rem;
-    animation: scroll 40s linear infinite;
     will-change: transform;
 }
 
@@ -762,15 +765,7 @@ body.js-ready .fade-in.active {
     z-index: 10;
 }
 
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(calc(-300px * 6 - 2rem * 6));
-    }
-}
+/* Removed CSS keyframes scroll */
 
 /* Services */
 .services {
@@ -790,32 +785,27 @@ body.js-ready .fade-in.active {
 
 .services-track-container {
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     padding: 2rem 0;
     position: relative;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
 }
 
-.services-track-container:hover .services-track {
-    animation-play-state: paused;
+.services-track-container::-webkit-scrollbar {
+    display: none;
 }
 
 .services-track {
     display: flex;
     width: max-content;
     gap: 2rem;
-    animation: servicesScroll 25s linear infinite;
     will-change: transform;
 }
 
-@keyframes servicesScroll {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(calc(-350px * 3 - 2rem * 3));
-    }
-}
+/* Removed CSS keyframes servicesScroll */
 
 .services-track .service-card {
     width: 350px;
@@ -1864,6 +1854,17 @@ footer {
     .retail-network .logo-safari,
     .retail-network .logo-mango {
         height: 80px;
+    }
+
+    /* Scale down Operational Excellence cards for mobile so multiple can be seen */
+    .services-track .service-card {
+        width: 250px;
+        padding: 2rem 1.5rem;
+    }
+
+    .gallery-item {
+        width: 200px;
+        height: 140px;
     }
 
     /* Scale down the text within the small cards */
