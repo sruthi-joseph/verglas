@@ -522,8 +522,7 @@ body.js-ready .fade-in.active {
 }
 
 .bento-card:hover .hover-arrow,
-.gallery-item-wrapper:hover .hover-arrow,
-.service-card:hover .hover-arrow {
+.gallery-item-wrapper:hover .hover-arrow {
     opacity: 1;
     transform: translateX(0);
 }
@@ -1387,6 +1386,8 @@ footer {
 
     .menu-toggle {
         display: flex;
+        z-index: 1100;
+        /* Ensure it's above the navbar and nav-links */
     }
 
     .menu-toggle.active .bar:nth-child(2) {
@@ -1799,8 +1800,8 @@ footer {
 /* Specific sizing for Retail Network logos to make them large and professional */
 .logo-ajman {
     height: auto;
-    max-height: 140px;
-    /* Increased for more presence */
+    max-height: 160px;
+    /* Normalized to 160px */
     width: 100%;
     max-width: 350px;
     margin: 0 auto;
@@ -1812,11 +1813,6 @@ footer {
     height: 160px;
     /* Large and consistent sizing */
     width: auto;
-}
-
-.logo-noon,
-.logo-safari {
-    height: 180px;
 }
 
 @media (max-width: 768px) {
@@ -1834,15 +1830,13 @@ footer {
         padding: 1.5rem 1rem;
     }
 
-    /* Scale down the logos specifically in the retail network */
-    .retail-network .logo-ajman {
-        max-height: 80px;
-    }
-
     .retail-network .logo-noon,
     .retail-network .logo-safari,
-    .retail-network .logo-mango {
+    .retail-network .logo-mango,
+    .retail-network .logo-ajman {
         height: 80px;
+        width: auto;
+        max-height: 80px;
     }
 
     /* Scale down Operational Excellence cards for mobile so multiple can be seen */
