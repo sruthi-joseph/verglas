@@ -1688,6 +1688,8 @@ footer {
 
 .logo-carousel-track .brand-card {
     flex: 0 0 350px;
+    width: 350px !important;
+    /* Prevent mobile overrides */
     margin: 0;
     opacity: 1;
     /* Ensure visible in carousel */
