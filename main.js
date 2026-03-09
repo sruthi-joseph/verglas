@@ -197,5 +197,43 @@ if (typeof THREE !== 'undefined') {
     initHero3D();
 }
 
+// Auto-scrolling Logo Carousel
+const initCarousel = () => {
+    const container = document.querySelector('.logo-carousel-container');
+    const track = document.querySelector('.logo-carousel-track');
+    if (!container || !track) return;
+
+    let isPaused = false;
+    let animationId;
+
+    // Clone the track content to ensure a seamless infinite scroll loop
+    track.innerHTML += track.innerHTML;
+
+    const scrollSpeed = 1; // Pixels per frame
+
+    const scroll = () => {
+        if (!isPaused) {
+            container.scrollLeft += scrollSpeed;
+            // Native smooth loop: if we scroll past the first half of the content, reset
+            if (container.scrollLeft >= track.scrollWidth / 2) {
+                container.scrollLeft = 0;
+            }
+        }
+        animationId = requestAnimationFrame(scroll);
+    };
+
+    // Pause on hover or touch
+    container.addEventListener('mouseenter', () => isPaused = true);
+    container.addEventListener('mouseleave', () => isPaused = false);
+    container.addEventListener('touchstart', () => isPaused = true, { passive: true });
+    container.addEventListener('touchend', () => {
+        setTimeout(() => isPaused = false, 1000); // Resume 1s after touch
+    });
+
+    scroll();
+};
+
+initCarousel();
+
 console.log('Verglas: All effects initialized.');
 

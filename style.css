@@ -1669,22 +1669,27 @@ footer {
 /* Logo Carousel Styles */
 .logo-carousel-container {
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     padding: 2rem 0;
     position: relative;
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.logo-carousel-container::-webkit-scrollbar {
+    display: none;
 }
 
 .logo-carousel-track {
     display: flex;
     width: max-content;
-    animation: scroll-left 20s linear infinite;
     gap: 2rem;
 }
 
-.logo-carousel-track:hover {
-    animation-play-state: paused;
-}
+/* Let JS handle hover pausing now, CSS pause only worked for CSS animations */
 
 .logo-carousel-track .brand-card {
     flex: 0 0 350px;
@@ -1697,16 +1702,6 @@ footer {
     /* Reset reveal transform for carousel items */
     animation: none !important;
     /* Disable individual pop-up animations in carousel */
-}
-
-@keyframes scroll-left {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(calc(-50% - 1rem));
-    }
 }
 
 .brand-card {
