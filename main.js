@@ -189,27 +189,7 @@ const initHero3D = () => {
 };
 
 // Sparkle Effect
-const createSparkles = throttle((e) => {
-    const maxSparkles = 10;
-    if (document.querySelectorAll('.sparkle').length >= maxSparkles) return;
-
-    const sparkle = document.createElement('div');
-    sparkle.className = 'sparkle';
-    sparkle.style.left = e.clientX + 'px';
-    sparkle.style.top = e.clientY + 'px';
-
-    const size = Math.random() * 5 + 2;
-    sparkle.style.width = size + 'px';
-    sparkle.style.height = size + 'px';
-
-    const colors = ['#02A576', '#ffffff', '#ffd700'];
-    sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-
-    document.body.appendChild(sparkle);
-    setTimeout(() => sparkle.remove(), 800);
-}, 50);
-
-document.addEventListener('mousemove', createSparkles);
+// Removed to greatly improve performance and reduce lag.
 
 // Initialize Three.js if available
 if (typeof THREE !== 'undefined') {
